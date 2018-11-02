@@ -30,3 +30,15 @@
     transform: rotate(360deg);
   }
 }
+
+
+.half-book-container {
+    width: 49%;
+    float: left;
+}
+.sell-activity {
+  background: #e88888;
+}
+.buy-activity {
+  background: #90e8a4;
+}

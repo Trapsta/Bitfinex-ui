@@ -7,8 +7,27 @@ const config =  {
   }
 }
 
+
+export const ws = new WebSocket(config.bitfinex.websocketPath)
+
 export default getData => new Promise(async (resolve, reject) => {
-  const ws = new WebSocket(config.bitfinex.websocketPath)
+
+  // if (!store.getState().connected) {
+  //   ws.close();
+  // }
+
+
+  store.subscribe( () => {
+
+    var connected = store.getState().connected;
+    if(  !connected ) {
+      console.log('closing connection');
+      ws.close();
+    }
+
+
+  });
+
 
   ws.onopen = () => {
     ws.send(JSON.stringify({
@@ -92,15 +111,15 @@ export default getData => new Promise(async (resolve, reject) => {
 
 
 
-  // if (window.socket) return resolve()
-
-  // window.socket = io
-  //   .connect('wss://api.bitfinex.com/ws/2')
-  //   .on('connect', () => {
-  //     console.log('ws connected')
-  //     resolve()
-  //   })
-  //   .on('action', dispatch)
 })
+
+
+export function disconnectServer() {
+
+  //disconnect = true;
+  //console.log(disconnect);
+}
+
+
 
 
